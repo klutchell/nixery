@@ -58,6 +58,7 @@ type Architecture struct {
 
 var amd64 = Architecture{"x86_64-linux", "amd64"}
 var arm64 = Architecture{"aarch64-linux", "arm64"}
+var armv7 = Architecture{"armv7l-linux", "armv7"}
 
 // Image represents the information necessary for building a container image.
 // This can be either a list of package names (corresponding to keys in the
@@ -137,13 +138,14 @@ type ImageResult struct {
 //
 // * `shell`: Includes bash, coreutils and other common command-line tools
 // * `arm64`: Causes Nixery to build images for the ARM64 architecture
+// * `armv7`: Causes Nixery to build images for the ARMv7 architecture
 func metaPackages(packages []string) (*Architecture, []string) {
 	arch := &amd64
 
 	var metapkgs []string
 	lastMeta := 0
 	for idx, p := range packages {
-		if p == "shell" || p == "arm64" {
+		if p == "shell" || p == "arm64" || p == "armv7" {
 			metapkgs = append(metapkgs, p)
 			lastMeta = idx + 1
 		} else {
@@ -161,6 +163,8 @@ func metaPackages(packages []string) (*Architecture, []string) {
 			packages = append(packages, "bashInteractive", "coreutils", "moreutils", "nano")
 		case "arm64":
 			arch = &arm64
+		case "armv7":
+			arch = &armv7
 		}
 	}
 

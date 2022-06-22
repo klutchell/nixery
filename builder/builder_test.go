@@ -110,3 +110,27 @@ func TestImageFromNameShellArm64(t *testing.T) {
 		t.Fatal("Image(\"shell/arm64\"): Expected arch arm64")
 	}
 }
+
+func TestImageFromNameShellArmv7(t *testing.T) {
+	image := ImageFromName("shell/armv7", "latest")
+	expected := Image{
+		Name: "armv7/shell",
+		Tag:  "latest",
+		Packages: []string{
+			"bashInteractive",
+			"cacert",
+			"coreutils",
+			"iana-etc",
+			"moreutils",
+			"nano",
+		},
+	}
+
+	if diff := cmp.Diff(expected, image, ignoreArch); diff != "" {
+		t.Fatalf("Image(\"shell/armv7\", \"latest\") mismatch:\n%s", diff)
+	}
+
+	if image.Arch.imageArch != "armv7" {
+		t.Fatal("Image(\"shell/armv7\"): Expected arch armv7")
+	}
+}

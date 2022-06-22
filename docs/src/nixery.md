@@ -37,6 +37,7 @@ there are only two meta-packages:
 - `shell`, which provides a `bash`-shell with interactive configuration and
   standard tools like `coreutils`.
 - `arm64`, which provides ARM64 binaries.
+- `armv7`, which provides ARMv7 binaries.
 
 **Tip:** When pulling from a private Nixery instance, replace `nixery.dev` in
 the above examples with your registry address.

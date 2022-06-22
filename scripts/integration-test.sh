@@ -46,6 +46,9 @@ case $(uname -m) in
   aarch64)
     docker run --rm localhost:8080/arm64/hello hello
     ;;
+  armv7l)
+    docker run --rm localhost:8080/armv7/hello hello
+    ;;
 esac
 
 # Pull an image of the opposite CPU architecture (but without running it)
@@ -54,6 +57,9 @@ x86_64)
   docker pull localhost:8080/arm64/hello
   ;;
 aarch64)
+  docker pull localhost:8080/hello
+  ;;
+armv7l)
   docker pull localhost:8080/hello
   ;;
 esac
